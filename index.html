@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NATION TO NATION NETWORKING | Official 501(c)(3) Non-Profit Organization</title>
+    <style>
+        /* 基础样式与渲染性能优化 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #2b2d42;
+            background-color: #fdfdfd;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1a73e8;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0d47a1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1d3557;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            color: #4a5568;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: #1a73e8;
+        }
+
+        .contact-donate-btn {
+            background-color: #e63946;
+            color: white !important;
+            padding: 10px 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-donate-btn:hover {
+            background-color: #d62828;
+        }
+
+        /* Hero Banner 优化：融入官方非营利组织尊贵蓝红配色，凸显 EIN 身份 */
+        .hero {
+            background: linear-gradient(rgba(13, 27, 42, 0.8), rgba(29, 53, 87, 0.75)), url('https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1200&auto=format&fit=crop') center/cover no-repeat;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            background-color: #e63946;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .hero-content h1 {
+            font-size: 46px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 35px;
+            color: #f1faee;
+        }
+
+        .hero-ein {
+            display: block;
+            font-size: 16px;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #a8dadc;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-btn {
+            background-color: #1a73e8;
+            color: white;
+            padding: 16px 36px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .hero-btn:hover {
+            background-color: #1557b0;
+            transform: translateY(-2px);
+        }
+
+        /* 核心使命板块 */
+        .mission-section { padding: 90px 0; background-color: #fff; }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 15px; color: #1d3557; font-weight: 700; }
+        .section-subtitle { text-align: center; font-size: 18px; color: #6c757d; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        
+        .mission-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .mission-text h3 { font-size: 28px; margin-bottom: 20px; color: #1d3557; }
+        .mission-text p { font-size: 17px; margin-bottom: 20px; color: #4a5568; text-align: justify; }
+        .mission-text ul { margin-left: 20px; margin-bottom: 25px; }
+        .mission-text li { font-size: 16px; margin-bottom: 12px; color: #4a5568; }
+        
+        .mission-img img, .impact-img img { 
+            width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            aspect-ratio: 12/9; object-fit: cover;
+        }
+
+        /* 社区影响力与项目板块 */
+        .impact-stories { padding: 90px 0; background-color: #f8fafc; }
+        .stories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 35px; }
+        .story-card { background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.04); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .story-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+        .story-img img { width: 100%; height: 230px; object-fit: cover; }
+        .story-content { padding: 25px; }
+        .story-content h4 { font-size: 20px; margin-bottom: 12px; color: #1d3557; font-weight: 700; }
+        .story-content p { color: #4a5568; margin-bottom: 20px; font-size: 15px; line-height: 1.5; }
+        .story-link { font-weight: 600; font-size: 14px; color: #1a73e8; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* 捐赠与官方支持板块 */
+        .donate-section { padding: 90px 0; background-color: #fff; text-align: center; }
+        .contact-info-box { background-color: #f8fafc; padding: 45px; border-radius: 8px; max-width: 750px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; }
+        .contact-info-box h4 { font-size: 22px; color: #1d3557; margin-bottom: 25px; font-weight: 700; }
+        .info-item { margin-bottom: 18px; font-size: 16px; color: #4a5568; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        
+        /* 运营背景介绍板块 */
+        .about-us { padding: 90px 0; background-color: #edf2f7; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+
+        /* 页脚设计 */
+        footer { background-color: #1d3557; color: #f1faee; padding: 70px 0 25px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 50px; }
+        .footer-column h4 { font-size: 18px; margin-bottom: 22px; color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 12px; }
+        .footer-column a { color: #a8dadc; font-size: 15px; }
+        .footer-column a:hover { color: #fff; }
+        .footer-column p { color: #f1faee; font-size: 15px; line-height: 1.6; }
+        
+        .footer-bottom { 
+            text-align: center; 
+            padding-top: 25px; 
+            border-top: 1px solid rgba(241, 250, 238, 0.15); 
+            color: #a8dadc; 
+            font-size: 14px; 
+            line-height: 1.5;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 992px) {
+            .mission-content, .about-content { grid-template-columns: 1fr; gap: 35px; }
+            .hero-content h1 { font-size: 34px; }
+            .section-title { font-size: 30px; }
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; gap: 20px; text-align: center; }
+            .hero { height: auto; padding: 80px 20px; }
+            .hero-content h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">NATION TO NATION</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#mission">Our Mission</a></li>
+                <li><a href="#impact">Impact & Programs</a></li>
+                <li><a href="#donate">Support Us</a></li>
+                <li><a href="#about">About Background</a></li>
+                <li><span class="contact-donate-btn" onclick="window.location.href='#donate'">Donate / Contact</span></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- 首页 Banner：清晰彰显官方非营利组织身份与 EIN 号码 -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <span class="hero-badge">Official 501(c)(3) Non-Profit Organization</span>
+        <h1>Connecting Cultures, Empowering Communities Across Nations</h1>
+        <p>NATION TO NATION NETWORKING is dedicated to fostering global collaboration, supporting multicultural integration, and driving sustainable community development from New York to the world.</p>
+        <button class="hero-btn" onclick="window.location.href='#mission'">Explore Our Impact</button>
+        <span class="hero-ein">Registered EIN: 20-8433005</span>
+    </div>
+</section>
+
+<!-- 组织核心使命与影响力描述 -->
+<section id="mission" class="mission-section">
+    <div class="container">
+        <h2 class="section-title">Bridging Gaps, Building Futures</h2>
+        <p class="section-subtitle">We believe that global change begins with local connection. By establishing solid networks across diverse cultural lines, we create lasting frameworks for social progress.</p>
+        <div class="mission-content">
+            <div class="mission-text">
+                <h3>Our Core Strategic Objectives</h3>
+                <p>At Nation to Nation Networking, we proactively address the structural challenges faced by diverse, multicultural populations in urban settings. Through strategic resource alignment and intercultural dialogue, we serve as a vital catalyst for local community enrichment.</p>
+                <ul>
+                    <li><strong>Cross-Border Network Building:</strong> Creating continuous collaborative channels between grassroots international organizations and local community leaders.</li>
+                    <li><strong>Multicultural Integration Frameworks:</strong> Providing systematic support for immigrants and ethnic minorities to navigate social systems smoothly.</li>
+                    <li><strong>Global Dialogue Inclusion:</strong> Ensuring underrepresented neighborhood groups have a distinct voice in global civic conversations.</li>
+                </ul>
+                <p><strong>Official Platform:</strong> <a href="https://nationtonation.online" target="_blank" style="font-weight: 600;">www.nationtonation.online</a></p>
+            </div>
+            <div class="mission-img">
+                <!-- 配图：国际化协作与高规格多民族峰会现场，突显组织宏大国际视野 -->
+                <img src="https://images.unsplash.com/photo-1544535830-9df4f783c65a?q=80&w=800&auto=format&fit=crop" alt="International summit and cultural dialogue session" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 运营背景与积极社区项目展示（体现社区影响力） -->
+<section id="impact" class="impact-stories">
+    <div class="container">
+        <h2 class="section-title">Active Programs & Community Impact</h2>
+        <p class="section-subtitle">Discover how our current initiatives are making tangible differences and expanding our footprint of cultural empowerment daily.</p>
+        <div class="stories-grid">
+            
+            <div class="story-card">
+                <div class="story-img">
+                    <!-- 配图：多民族青年领袖圆桌会议 -->
+                    <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=500&auto=format&fit=crop" alt="Global Youth Leadership Forum" loading="lazy">
+                </div>
+                <div class="story-content">
+                    <h4>Global Youth Leadership Forum</h4>
+                    <p>Empowering the next generation of global citizens. This initiative equips young advocates from multicultural backgrounds with necessary public administration, mediation, and civic leadership toolsets.</p>
+                    <a href="#impact" class="story-link">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="story-img">
+                    <!-- 配图：面向社区弱势群体的资源对接与职业培训 -->
+                    <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=500&auto=format&fit=crop" alt="Community Resource Seminars" loading="lazy">
+                </div>
+                <div class="story-content">
+                    <h4>Community Equity Seminars</h4>
+                    <p>Our ongoing metropolitan workshops help bridge the technology and literacy gaps in underserved boroughs, assisting over 1,500 families annually with essential social service navigation.</p>
+                    <a href="#impact" class="story-link">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="story-img">
+                    <!-- 配图：跨国多元文化交流节与艺术展览 -->
+                    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?q=80&w=500&auto=format&fit=crop" alt="Cross-Cultural Exchange Festivals" loading="lazy">
+                </div>
+                <div class="story-content">
+                    <h4>Cross-Cultural Festivals</h4>
+                    <p>Celebrating human diversity through localized cultural heritage preservation. We host multi-ethnic exhibitions that turn localized community hubs into interactive platforms for mutual understanding.</p>
+                    <a href="#impact" class="story-link">Learn More →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- 捐赠支持与合规联络板块 -->
+<section id="donate" class="donate-section">
+    <div class="container">
+        <h2 class="section-title">Support Our Global Advocacy</h2>
+        <div class="donate-content">
+            <p class="section-subtitle" style="margin-bottom: 35px;">Your tax-deductible contribution guarantees the continuity of our community inclusion programs, research advocacy, and global networks.</p>
+            
+            <div class="contact-info-box">
+                <h4>Official Contact & Communication Hub</h4>
+                <div class="info-item">
+                    <span>📧</span> 
+                    <strong>Email Address:</strong> 
+                    <a href="mailto:contact@nationtonation.online">contact@nationtonation.online</a>
+                </div>
+                <div class="info-item">
+                    <span>📍</span> 
+                    <strong>Headquarters Location:</strong> 
+                    <span>220 Manhattan Avenue Suite 8E, New York, NY 10025</span>
+                </div>
+                <div class="info-item">
+                    <span>🌐</span> 
+                    <strong>Official Web Domain:</strong> 
+                    <a href="https://nationtonation.online" target="_blank">nationtonation.online</a>
+                </div>
+            </div>
+            
+            <p style="margin-top:40px; font-size: 15px; color: #6c757d; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+                <strong>Tax Compliance Information:</strong> NATION TO NATION NETWORKING is formally recognized as a tax-exempt charitable organization under Section 501(c)(3) of the Internal Revenue Code. Public records can be verified via <strong>EIN: 20-8433005</strong>. All financial donations are fully tax-deductible to the statutory extent of the law.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- 深度运营背景板块 -->
+<section id="about" class="about-us">
+    <div class="container">
+        <h2 class="section-title">Operational Background & Strength</h2>
+        <div class="about-content">
+            <div class="about-img">
+                <!-- 配图：充满活力的纽约曼哈顿社区，呼应其实际地理和运营背景 -->
+                <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?q=80&w=800&auto=format&fit=crop" alt="New York Manhattan community background" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h3>Rooted in New York, Connecting the World</h3>
+                <p>Operating directly out of Manhattan, New York, Nation to Nation Networking serves as a vital bridge in one of the world's most culturally vibrant hubs. We are a resource network providing unique solutions to contemporary cultural fragmentation.</p>
+                <p>When community groups find themselves isolated by cultural differences or language barriers, our organization steps in to provide professional communication pathways, legal resource orientation, and community advocacy leadership.</p>
+                <p>By fostering active partnerships with institutional policy-makers, academic groups, and public foundations, we guarantee that the projects we run maintain a rigorous standard of accountability and generate quantifiable community impact.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 统一版权与官方信息页脚 -->
+<footer id="contact">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Organization Profile</h4>
+                <p>NATION TO NATION NETWORKING is a certified New York State 501(c)(3) non-profit entity dedicated to intercultural advancement, equity advocacy, and socio-economic integration network models.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Navigation</h4>
+                <ul>
+                    <li><a href="#home">Home Dashboard</a></li>
+                    <li><a href="#mission">Core Mission</a></li>
+                    <li><a href="#impact">Impact Portfolios</a></li>
+                    <li><a href="#donate">Donate Support</a></li>
+                    <li><a href="#about">About Background</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Corporate Details</h4>
+                <p>
+                    <strong>Address:</strong> 220 Manhattan Avenue Suite 8E, New York, NY 10025<br>
+                    <strong>Inquiries:</strong> contact@nationtonation.online<br>
+                    <strong>Web:</strong> nationtonation.online<br>
+                    <strong>EIN:</strong> 20-8433005
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 NATION TO NATION NETWORKING | International Intercultural Network | Employer Identification Number (EIN): 20-8433005 | 501(c)(3) Public Charity Status Registered | All Rights Reserved.
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 平滑滚动脚本
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if(document.querySelector(targetId)) {
+                document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
